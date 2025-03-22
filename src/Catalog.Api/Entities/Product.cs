@@ -6,7 +6,7 @@ namespace Catalog.Api.Entities
     public class Product
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRepresentation(BsonType.String)]
         public Guid Id { get; set; }
         [BsonElement("Name")]
         public string Name { get; set; }
