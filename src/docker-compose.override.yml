@@ -22,7 +22,7 @@ services:
     depends_on:
       - catalogdb
     ports:
-      - "8080:80"
+      - "7000:80"
        
 
 volumes:

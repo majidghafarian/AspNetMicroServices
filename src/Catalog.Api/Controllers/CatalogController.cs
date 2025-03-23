@@ -19,10 +19,12 @@ namespace Catalog.Api.Controllers
             _repository=repository;
         }
 
+
         [HttpGet("GetAllProducts")]
         [ProducesResponseType(typeof(IEnumerable<Product>),(int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
+            _logger.LogInformation("test");
             var products = await _repository.GetAllProductsAsync();
             return Ok(products);
         }
