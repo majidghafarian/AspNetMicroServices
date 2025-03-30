@@ -19,15 +19,16 @@ services:
   
   discountdb:
     container_name: discountdb
-    restart: always
+    image: postgres
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin1234
-      - POSTGRESS_DB=discountdb
+      - POSTGRES_DB=discountdb
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgressql/data/
+      - postgres_data:/var/lib/postgresql/data
+
   
   pgadmin:
     container_name: pgadmin
@@ -85,10 +86,15 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+    depends_on:
+      - discountdb
     ports:
       - "7002:8080"
+    
+
 
 volumes:
   mongo_data:
+  postgres_data:
 
 
