@@ -86,6 +86,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Host=discountdb;Port=5432;Database=discountdb;Username=admin;Password=admin1234 
     depends_on:
       - discountdb
     ports:

@@ -7,6 +7,14 @@
 
   discountdb:
     image: postgres
+    environment:
+      POSTGRES_DB: discountdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
@@ -31,6 +39,7 @@
     build:
       context: .
       dockerfile: Services/Discount/Discount.api/Dockerfile
+
 
  volumes:
   mongo_data:

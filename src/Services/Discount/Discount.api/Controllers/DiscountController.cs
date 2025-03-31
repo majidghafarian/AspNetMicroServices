@@ -22,7 +22,7 @@ namespace Discount.api.Controllers
         [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Coupon>> GetDiscount(string ProductName)
         {
-            _logger.LogInformation("test");
+            _logger.LogInformation($"Received request for product: {ProductName}");
             var coupon = await _discountRepository.GetDiscount(ProductName);
             return Ok(coupon);
         }
