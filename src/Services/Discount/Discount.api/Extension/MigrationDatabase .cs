@@ -24,7 +24,7 @@ namespace Discount.api.Extension
                     {
                         Connection= Conection
                     };
-                    command.CommandText="DROP TABLE IF EXISTS Couppn";
+                    command.CommandText="DROP TABLE IF EXISTS Coupon";
                     command.ExecuteNonQuery();
 
                     command.CommandText=@"CREATE TABLE Coupon(
