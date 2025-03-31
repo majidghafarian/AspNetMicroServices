@@ -1,8 +1,10 @@
 ﻿using Discount.api.Context;
+using Discount.api.Extension;
 using Discount.api.Repositories;
 using Discount.api.Repostories;
 
 var builder = WebApplication.CreateBuilder(args);
+ 
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -30,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.MigrationDatabase<Program>();
 app.UseAuthorization();
 
 app.MapControllers();
