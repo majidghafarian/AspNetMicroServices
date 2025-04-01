@@ -1,11 +1,11 @@
 ﻿using Dapper;
-using Discount.api.Entities;
-using Discount.api.Repostories;
+using Discount.Grpc.Entities;
+using Discount.Grpc.Repostories;
 using Microsoft.Extensions.Options;
 using Npgsql;
 using System.Data;
 
-namespace Discount.api.Repositories
+namespace Discount.Grpc.Repositories
 {
     public class DiscountRepository : IDiscountRepository
     {
@@ -18,7 +18,7 @@ namespace Discount.api.Repositories
             // برای تست
             Console.WriteLine($"Connection String: {_connectionString}");
         }
-
+ 
 
         public async Task<bool> CreateDiscount(Coupon coupon)
         {
