@@ -16,6 +16,7 @@ namespace Basket.Api.Repostories
         {
             await _RedisCache.RemoveAsync(UserName);
         }
+ 
 
         public async Task<ShoppingCart> GetBasket(string UserName)
         {

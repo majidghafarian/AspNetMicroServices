@@ -38,5 +38,5 @@ message CouponModel{
 	int32 id=1;
 	string ProductName=2;
 	string Description=3;
-	string Amount=4;
+	int32 Amount=4;
 }

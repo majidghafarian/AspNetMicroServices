@@ -12,18 +12,6 @@
         {
             UserName = _username;
         }
-        public decimal TotalPrice
-        {
-            get
-            {
-                decimal totalprice = 0;
-                foreach (var item in Items)
-                {
-                    totalprice += item.Price+item.Quantity;
-                }
-                return totalprice;
-            }
-
-        }
+        public decimal TotalPrice => Items.Sum(x => x.Price*x.Quantity);
     }
 }
