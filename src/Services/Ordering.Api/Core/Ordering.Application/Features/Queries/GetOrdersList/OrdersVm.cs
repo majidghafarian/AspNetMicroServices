@@ -1,13 +1,12 @@
-﻿using Ordering.Domain.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ordering.Domain.Entities
+namespace Ordering.Application.Features.Queries.GetOrdersList
 {
-    public class Order: EntityBase
+    public class OrdersVm
     {
         public int OrderId { get; set; }
         public string UserName { get; set; }
@@ -19,8 +18,8 @@ namespace Ordering.Domain.Entities
         public string State { get; set; }
         public string ZipCode { get; set; }
         public decimal TotalPrice { get; set; }
-      
-       
+ 
+        // Constructor
 
         //payment
         public string CardName { get; set; }
