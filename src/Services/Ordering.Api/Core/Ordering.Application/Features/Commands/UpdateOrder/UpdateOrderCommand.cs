@@ -1,14 +1,15 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ordering.Application.Features.Queries.GetOrdersList
+namespace Ordering.Application.Features.Commands.UpdateOrder
 {
-    public class OrdersVm
+    public class UpdateOrderCommand : IRequest 
     {
-      
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,8 +19,8 @@ namespace Ordering.Application.Features.Queries.GetOrdersList
         public string State { get; set; }
         public string ZipCode { get; set; }
         public decimal TotalPrice { get; set; }
- 
-        // Constructor
+
+
 
         //payment
         public string CardName { get; set; }

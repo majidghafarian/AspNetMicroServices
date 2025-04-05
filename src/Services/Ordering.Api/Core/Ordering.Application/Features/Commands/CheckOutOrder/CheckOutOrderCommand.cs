@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+ 
 
-namespace Ordering.Application.Features.Queries.GetOrdersList
+namespace Ordering.Application.Features.Commands.CheckOutOrder
 {
-    public class OrdersVm
+    public class CheckOutOrderCommand:IRequest<int>
     {
-      
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -19,9 +15,6 @@ namespace Ordering.Application.Features.Queries.GetOrdersList
         public string ZipCode { get; set; }
         public decimal TotalPrice { get; set; }
  
-        // Constructor
-
-        //payment
         public string CardName { get; set; }
         public string CardNumber { get; set; }
         public string Expiration { get; set; }
