@@ -33,6 +33,16 @@ services:
     networks:  # این خط را درست کردیم
       - backend
 
+  OrderDb:
+    container_name: OrderDb
+    environment:
+        SA_PASSWORD: "swN12345678"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+    - "1433:1433"
+    volumes:
+      - orderdbdata:/var/opt/mssql
   
   pgadmin:
     container_name: pgadmin
@@ -122,6 +132,7 @@ services:
 volumes:
   mongo_data:
   postgres_data:
+  orderdbdata:
 networks:
   backend:
    driver: bridge
