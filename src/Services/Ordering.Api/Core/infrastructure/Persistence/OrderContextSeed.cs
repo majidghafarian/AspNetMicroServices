@@ -10,20 +10,21 @@ namespace Ordering.infrastructure.Persistence
 {
     public class OrderContextSeed
     {
-        public async static Task SeedAsync(OrderContext orderContext, ILogger<OrderContextSeed> Logger)
+        public async static Task SeedAsync(OrderContext orderContext, ILogger<OrderContextSeed> logger)
         {
             if (!orderContext.orders.Any())
             {
-             orderContext.orders.AddRange();
+                orderContext.orders.AddRange(GetPreConfigOrder());
                 await orderContext.SaveChangesAsync();
             }
         }
+
         private static IEnumerable<Order> GetPreConfigOrder()
         {
             return new List<Order>
-            {
-                new Order(){ UserName="swn",FirstName="Mehment",LastName="ozkaya",EmailAddress="ezozo@gmail.com",Country="turkey",TotalPrice=350}
-            };
+        {
+            new Order { UserName = "swn", FirstName = "Mehmet", LastName = "Ozkaya", EmailAddress = "ezozo@gmail.com", Country = "Turkey", TotalPrice = 350 }
+        };
         }
     }
 }
