@@ -129,6 +129,15 @@ services:
     networks:  # این خط را درست کردیم
       - backend
 
+  ordering.api:
+    container_name: ordering.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=80
+      - ConnectionStrings__OrderingConnectionString=Server=OrderDb;Database=OrderDb;User Id=sa;Password=swN12345678;Trust Server Certificate=True
+    ports:
+      - "7004:80"
+
 volumes:
   mongo_data:
   postgres_data:
@@ -136,5 +145,6 @@ volumes:
 networks:
   backend:
    driver: bridge
+
 
 

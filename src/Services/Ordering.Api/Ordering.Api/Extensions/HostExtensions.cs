@@ -22,22 +22,44 @@ namespace Ordering.Api.Extensions
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "An error occurred while migrating the database");
-                    if (retryforavaliblity < 50)
+                    logger.LogError(ex, "An error occurred while migrating the database. Retry attempt {Retry}", retryforavaliblity);
+
+                    if (retryforavaliblity < 5)
                     {
                         retryforavaliblity++;
+                        Thread.Sleep(2000); // یا await Task.Delay(2000); اگر متد async باشه
                         MigrationDataBase<TContext>(host, seeder, retryforavaliblity);
                     }
+                    else
+                    {
+                        logger.LogError("Migration failed after {Retry} attempts", retryforavaliblity);
+                        throw; // اگه بخوای بعد از چند بار تلاش بی‌نتیجه اپلیکیشن fail بشه
+                    }
                 }
+
             }
             return host;
         }
 
         public static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider> seeder,
-            TContext context, IServiceProvider service) where TContext : DbContext
+          TContext context, IServiceProvider service) where TContext : DbContext
         {
-            context.Database.Migrate();
-            seeder(context, service);
+            try
+            {
+                context.Database.Migrate(); // اعمال مایگریشن‌ها
+                seeder(context, service);   // اجرای Seeder
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("❌ Error during database migration or seeding:");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.InnerException?.Message); // اگه InnerException هم داشت
+                Console.WriteLine(ex.StackTrace);
+                Console.ResetColor();
+                throw; // اگه خواستی جلوش رو نگیره و همون خطا بالا بره
+            }
         }
+
     }
 }

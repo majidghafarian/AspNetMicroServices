@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.Features.Commands.UpdateOrder
 {
-    public class UpdateOrderCommandHandler : IRequest<UpdateOrderCommand>
+    public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
     {
         private readonly IMapper _mapper;
         private readonly IOrderRepository _orderRepository;
-        private readonly Logger<UpdateOrderCommandHandler> _logger;
-        public UpdateOrderCommandHandler(IMapper mapper, IOrderRepository orderRepository, Logger<UpdateOrderCommandHandler> logger)
+        private readonly ILogger<UpdateOrderCommandHandler> _logger;
+        public UpdateOrderCommandHandler(IMapper mapper, IOrderRepository orderRepository, ILogger<UpdateOrderCommandHandler> logger)
         {
             _mapper = mapper;
             _orderRepository = orderRepository;

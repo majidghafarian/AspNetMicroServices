@@ -21,7 +21,7 @@ namespace Ordering.infrastructure.Repositories
         public async Task<T> AddAsync(T entity)
         {
             _Context.Set<T>().Add(entity);
-            _Context.SaveChanges();
+            await _Context.SaveChangesAsync();  // استفاده از SaveChangesAsync
             return entity;
         }
 
