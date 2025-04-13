@@ -20,10 +20,20 @@ namespace Ordering.infrastructure.Repositories
         }
         public async Task<T> AddAsync(T entity)
         {
-            _Context.Set<T>().Add(entity);
-            await _Context.SaveChangesAsync();  // استفاده از SaveChangesAsync
-            return entity;
+            try
+            {
+                _Context.Set<T>().Add(entity);
+                await _Context.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                // اینجا لاگ بگیر یا breakpoint بذار
+                Console.WriteLine("Error in SaveChangesAsync: " + ex.Message);
+                throw;
+            }
         }
+
 
         public async Task DeleteAsync(T entity)
         {

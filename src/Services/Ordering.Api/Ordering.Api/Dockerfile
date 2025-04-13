@@ -4,7 +4,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 80
+EXPOSE 8080
 
 
 # This stage is used to build the service project
@@ -12,6 +12,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Services/Ordering.Api/Ordering.Api/Ordering.Api.csproj", "Services/Ordering.Api/Ordering.Api/"]
+COPY ["BuildingBlocks/EventBus.Messages/EventBus.Messages.csproj", "BuildingBlocks/EventBus.Messages/"]
 COPY ["Services/Ordering.Api/Core/infrastructure/Ordering.infrastructure.csproj", "Services/Ordering.Api/Core/infrastructure/"]
 COPY ["Services/Ordering.Api/Core/Ordering.Application/Ordering.Application.csproj", "Services/Ordering.Api/Core/Ordering.Application/"]
 COPY ["Services/Ordering.Api/Core/Ordering.Domain/Ordering.Domain.csproj", "Services/Ordering.Api/Core/Ordering.Domain/"]

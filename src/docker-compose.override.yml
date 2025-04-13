@@ -94,8 +94,7 @@ services:
     ports:
       - "7000:8080"
   
-  
-       
+        
 
   basket.api:
     container_name: basket.api
@@ -104,8 +103,10 @@ services:
       - "CacheSettings:ConnectionString=basketdb:6379"
       - "GrpcSettings:DiscountUrl=http://discount.grpc:80"
       - ASPNETCORE_HTTP_PORTS=8080
+      - "EventBusSettings:HostAddress=amqp://admin:admin1234@rabbitmq:5672"
     depends_on:
       - basketdb
+      - rabbitmq
     ports:
       - "7001:8080"
     networks:
@@ -145,6 +146,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=80
       - ConnectionStrings__OrderingConnectionString=Server=OrderDb;Database=OrderDb;User Id=sa;Password=swN12345678;Trust Server Certificate=True
+      - "EventBusSettings:HostAddress=amqp://admin:admin1234@rabbitmq:5672"
+    depends_on:
+      - OrderDb
+      - rabbitmq
     ports:
       - "7004:80"
 
