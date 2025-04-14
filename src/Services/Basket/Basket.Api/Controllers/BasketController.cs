@@ -27,7 +27,7 @@ namespace Basket.Api.Controllers
             _publishEndpoint=publishEndpoint;
         }
 
-        [HttpGet("GEtBasket")]
+        [HttpGet("{userName}")]
         [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ShoppingCart>> GetBasket(string UserName)
         {
