@@ -8,9 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // ۱. تنظیم کانفیگ برای Ocelot
 var env = builder.Environment;
 builder.Configuration
-    .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"ocelot.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-    .AddJsonFile("ocelot.local.json", optional: true, reloadOnChange: true);
+    //.SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("Ocelot.Development.json", optional: false, reloadOnChange: true);
+    //.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
 // ۲. اضافه کردن سرویس Ocelot
 builder.Services.AddOcelot().AddCacheManager(settings=>settings.WithDictionaryHandle());
 
