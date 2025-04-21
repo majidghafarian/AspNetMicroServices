@@ -9,6 +9,8 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - backend
  
   basketdb:
     container_name: basketdb
@@ -43,6 +45,8 @@ services:
     - "1433:1433"
     volumes:
       - orderdbdata:/var/opt/mssql
+    networks:  # این خط را درست کردیم
+      - backend
  
 
   rabbitmq:
@@ -93,6 +97,8 @@ services:
       - catalogdb
     ports:
       - "7000:8080"
+    networks:
+      - backend
   
         
 
@@ -152,6 +158,8 @@ services:
       - rabbitmq
     ports:
       - "7004:80"
+    networks:
+      - backend
 
   ocelotapigw:
     container_name: ocelotapigw
@@ -165,6 +173,25 @@ services:
       - basket.api
     ports:
       - "8010:80"
+    networks:
+      - backend
+
+  shopping.aggregator:
+    container_name: shopping.aggregator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - "ApiSettings:CatalogUrl=http://catalog.api:8080" 
+      - "ApiSettings:BasketUrl=http://basket.api:8080" 
+      - "ApiSettings:OrderingUrl=http://ordering.api"
+    depends_on:
+      - ordering.api
+      - catalog.api
+      - basket.api
+    ports:
+      - "8005:8080"
+    networks:
+      - backend
 
 volumes:
   mongo_data:
@@ -173,6 +200,7 @@ volumes:
 networks:
   backend:
    driver: bridge
+
 
 
 

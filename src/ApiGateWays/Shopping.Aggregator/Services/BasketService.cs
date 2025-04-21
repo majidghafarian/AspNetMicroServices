@@ -8,7 +8,7 @@ namespace Shopping.Aggregator.Services
         private readonly HttpClient _httpClient;
         public BasketService(HttpClient httpClient)
         {
-            _httpClient = _httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
         public async Task<BasketModel> GetBasket(string UserName)
         {

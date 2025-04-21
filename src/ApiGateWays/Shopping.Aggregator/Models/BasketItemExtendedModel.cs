@@ -6,7 +6,7 @@
         public string Color { get; set; }
         public decimal Price { get; set; }
         public string ProductName { get; set; }
-        public int ProduuctId { get; set; }
+        public Guid ProduuctId { get; set; }
 
         ////product realated additional fields
         public List<string> Category { get; set; } = new();
